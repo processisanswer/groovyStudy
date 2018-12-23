@@ -87,9 +87,9 @@ int fab(int number){
     return result
 }
 println cal(6)*/
-3.times {
+/*3.times {
     println it
-}
+}*/
 //字符串与闭包
 /*def str="groovy123"
 str.each {
@@ -99,10 +99,46 @@ str.each {
 println str.find {
     it.isNumber()
 }*/
-
-
-
-
+/*def scriptClosure={
+    //this 代表Closure 脚本名称
+    println "scriptClosure this:"+this
+    //
+    println "scriptClosure owner:"+owner
+    println "scriptClosure delegate"+delegate
+}
+scriptClosure()*/
+class Person{
+    def static classClosure ={
+        //代表闭包定义处的类--最近的一个class类
+        println "scriptClosure this:"+this
+        //代表定义处的类或对象
+        println "scriptClosure owner:"+owner
+        //代表任意对象，默认与owner一样
+        println "scriptClosure delegate"+delegate
+    }
+    def static say(){
+        def classClosure={
+            println "scriptClosure this:"+this
+            println "scriptClosure owner:"+owner
+            println "scriptClosure delegate"+delegate
+        }
+        classClosure.call()
+    }
+}
+Person.classClosure()
+Person.say()
+def nestClosure={
+    println "nestClosure this:"+this
+    println "nestClosure owner:"+owner
+    println "nestClosure delegate:"+delegate
+    def innerClosure={
+        println "innerClosure this:"+this
+        println "innnerClosure owner:"+owner
+        println "innerClosure delegate:"+delegate
+    }
+    innerClosure.call()
+}
+nestClosure.call()
 
 
 
